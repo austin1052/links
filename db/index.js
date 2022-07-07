@@ -6,10 +6,10 @@ const DB_URL = process.env.DATABASE_URL || `postgres://${DB_NAME}`;
 // const client = new Client(DB_URL);
 const client = new Client({
   connectionString: DB_URL,
-  ssl: process.env.DATABASE_URL ? true : false
-  // ssl: {
-  //   rejectUnauthorized: false
-  // }
+  ssl: process.env.DATABASE_URL ? true : false,
+  ssl: {
+    rejectUnauthorized: false
+  }
 });
 
 const bcrypt = require("bcrypt");
@@ -107,10 +107,10 @@ async function hashPassword(password) {
 // GET api/links/:userId
 const getAllLinks = async (id, query) => {
   try {
-    if(arguments.length == 1) // Means second parameter is not passed
-      {
-        query = [];
-      }
+    if (arguments.length == 1) // Means second parameter is not passed
+    {
+      query = [];
+    }
     const { rows: links } = await client.query(
       `
       SELECT * FROM links WHERE "creatorId"=$1 ORDER BY id ASC ;
@@ -161,7 +161,7 @@ const searchLinks = async (query) => {
       SELECT 
     `)
   } catch (error) {
-    
+
   }
 }
 
