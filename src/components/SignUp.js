@@ -40,7 +40,7 @@ const SignUp = ({ setUser, setShowSignUp }) => {
     try {
       const user = await registerUser(usernameInput, passwordInput);
       if (!user.token) {
-        alert(user.message);
+        alert(user.data);
         setPasswordInput("");
         setVerifyPasswordInput("");
 
